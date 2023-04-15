@@ -4,8 +4,12 @@ from utils import set_seed, compute_metrics
 from load_data import SentimentDataset
 from torch import optim
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
+import wandb
 
 def train(cfg):
+
+    ## wandb
+    wandb.init(entity='sympathy', project=cfg.wandb.project_name, name=cfg.wandb.exp_name)
 
     ## device 설정
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -47,6 +51,7 @@ def train(cfg):
         save_steps=1000,
         evaluation_strategy='steps',
         eval_steps=1000,
+        report_to=["wandb"]
     )
 
     trainer = Trainer(
@@ -61,3 +66,6 @@ def train(cfg):
     trainer.train()
 
     model.save_pretrained('./model_result/test')
+
+    ## wandb finish
+    wandb.finish()

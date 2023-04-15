@@ -7,23 +7,24 @@ model:
     saved_model: /opt/ml/saved_model/roberta_small.pt
   
 train:
-    train_mode: False
+    train_mode: True
     scheduler : CosineAnnealing         # [CosineAnnealing, CyclicLR]
     seed: 42
     batch_size: 16
     epoch: 10
     lr: 1e-5
-    num_workers : 4
     logging_step: 1000
-    patience : 2
     warmup_steps : 500
     weight_decay: 0.01
     eps : 1e-8
-    checkpoint : /opt/ml/code/results
     T_0 : 50
     T_mult : 2
     eta_min : 1e-7
+
+wandb:
+    project_name: klue-roberta-small  # repo 이름
+    exp_name:    # 실험관리로 보여지는 이름
     
 test:
-    test_mode: True
+    test_mode: False
     output_csv: ~/output_csv/roberta_small.csv
