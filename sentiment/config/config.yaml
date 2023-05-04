@@ -18,12 +18,11 @@ train:
     batch_size: 8
     epoch: 10
     lr: 1e-5
-    num_workers : 4
     logging_step: 1000
-    patience : 2
     warmup_steps : 500
     weight_decay: 0.01
     eps : 1e-8
+    checkpoint : /opt/ml/code/results
     T_0 : 50
     T_mult : 2
     eta_min : 1e-7
@@ -33,5 +32,5 @@ wandb:
     exp_name: Sentiment_batch_8   # 실험관리로 보여지는 이름
     
 test:
-    test_mode: False
-    output_csv: /opt/ml/data/output_csv/roberta.csv
+    test_mode: True
+    output_csv: ~/output_csv/roberta_small.csv

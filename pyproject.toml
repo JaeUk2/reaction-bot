@@ -10,6 +10,9 @@ python = "^3.8"
 pandas = "^2.0.0"
 torch = "^2.0.0"
 transformers = "^4.27.4"
+wandb = "^0.14.2"
+omegaconf = "^2.3.0"
+scikit-learn = "^1.2.2"
 
 
 [build-system]
