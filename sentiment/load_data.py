@@ -13,7 +13,7 @@ class SentimentDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         talk = self.dataset.iloc[idx]['talk']
         label = self.dataset.iloc[idx]['emotion']
-        talk_encoding = self.tokenizer(talk, padding="max_length", max_length=256, truncation=True)
+        talk_encoding = self.tokenizer(talk, padding="max_length", max_length=128, truncation=True)
 
         result = {key: torch.LongTensor(val) for key, val in talk_encoding.items()}
         result['labels'] = torch.tensor(label)

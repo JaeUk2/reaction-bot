@@ -26,15 +26,20 @@ def set_seed(seed):
 
 def num_to_label(label):
     num_label = []
-    # sentiment = {1:"분노", 2:"슬픔", 3:"불안", 4:"상처", 5:"당황", 6:"기쁨"}
-    sentiment = {0:"분노", 1:"슬픔", 2:"불안", 3:"상처", 4:"당황", 5:"기쁨", 6:"중립"}
+    sentiment = {0 : "중립", 1:"분노", 2:"슬픔", 3:"불안", 4:"상처", 5:"당황", 6:"기쁨"}
+    # sentiment = {0:"분노", 1:"슬픔", 2:"불안", 3:"상처", 4:"당황", 5:"기쁨", 6:"중립"}
     for v in label:
         num_label.append(sentiment[v])
     
     return num_label
 
+def num_to_label_one(label):
+    sentiment = {0 : "중립", 1:"분노", 2:"슬픔", 3:"불안", 4:"상처", 5:"당황", 6:"기쁨"}
+    
+    return sentiment[label]
+
 def sentiment_micro_f1(preds, labels):
-    label_list = ['분노', '슬픔', '불안', '상처', '당황', '기쁨', '중립']
+    label_list = ['중립', '분노', '슬픔', '불안', '상처', '당황', '기쁨']
     
     label_indices = list(range(len(label_list)))
     return sklearn.metrics.f1_score(labels, preds, average="micro", labels=label_indices) * 100.0
@@ -59,7 +64,7 @@ def compute_metrics(pred):
     # calculate accuracy using sklearn's function
     f1 = sentiment_micro_f1(preds, labels)
     auprc = sentiment_auprc(probs, labels)
-    acc = accuracy_score(labels, preds) # 리더보드 평가에는 포함되지 않습니다.
+    acc = accuracy_score(labels, preds)
 
     return {
       'micro_f1_score': f1,

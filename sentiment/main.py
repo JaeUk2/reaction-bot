@@ -6,7 +6,8 @@ import argparse
 from load_data import *
 from utils import *
 from train import *
-from inference import *
+# from inference import *
+from test import *
 import random
 
 # transformers, sklearn, OmegaConf

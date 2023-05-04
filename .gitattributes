@@ -1,3 +1,4 @@
 *.py	eol=lf
 *.rst	eol=lf
 *.md	eol=lf
+*.pt filter=lfs diff=lfs merge=lfs -text
