@@ -1,1 +1,1 @@
-# reaction-bot
+# Reaction Bot

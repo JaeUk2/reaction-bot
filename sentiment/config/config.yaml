@@ -1,0 +1,36 @@
+data:
+    train_data: /opt/ml/data/train.csv
+    valid_data: /opt/ml/data/valid.csv
+    test_data : /opt/ml/data/test.csv
+    
+model:
+    model_name: klue/roberta-small
+    # klue/roberta-small, monologg/koelectra-base-v3-discriminator, monologg/distilkobert, beomi/kcbert-base
+    saved_model: /opt/ml/saved_model/roberta_small_batch_8.pt
+    # roberta_small.pt, koelectra.pt, distilkobert.pt, kcbert.pt
+    HF_model : /opt/ml/reaction-bot/model_HF/roberta_small_batch8/
+
+train:
+    train_mode: True
+    scheduler : CosineAnnealing         # [CosineAnnealing, CyclicLR, LambdaLR]
+    output_dir : /opt/ml/reaction-bot/sentiment/results/roberta_small_batch8/
+    seed: 42
+    batch_size: 8
+    epoch: 10
+    lr: 1e-5
+    logging_step: 1000
+    warmup_steps : 500
+    weight_decay: 0.01
+    eps : 1e-8
+    checkpoint : /opt/ml/code/results
+    T_0 : 50
+    T_mult : 2
+    eta_min : 1e-7
+
+wandb:
+    project_name: klue-roberta-small  # repo 이름
+    exp_name: Sentiment_batch_8   # 실험관리로 보여지는 이름
+    
+test:
+    test_mode: True
+    output_csv: ~/output_csv/roberta_small.csv
